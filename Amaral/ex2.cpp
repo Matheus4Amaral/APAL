@@ -74,9 +74,9 @@ void ordenacaoAnimacao(vector<int> &v) {
             j = j - 1;
         }
         v[j + 1] = chave;
+        Utilitaria::aguardar(2000);
         Utilitaria::limparTela();
         exibirAnimado(v, i);
-        Utilitaria::aguardar(2000);
         cout << endl;
     }
 }
