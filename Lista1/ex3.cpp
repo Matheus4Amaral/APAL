@@ -1,4 +1,3 @@
-void ordenacaoPorInsercaoParcial(vector<int> &v, int tam);
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -9,71 +8,56 @@ void ordenacaoPorInsercaoParcial(vector<int> &v, int tam);
 using namespace std;
 using namespace chrono;
 
-void exibir(vector<int> &v);
-void ordenacaoPorInsercao(vector<int> &v);
 void preencher(vector<int> &v, int min, int max);
+void ordenacaoPorInsercaoParcial(vector<int> &v, int tam);
 
-int main() {
-	srand(time(NULL));
+int main() { // quadratico (método omega n ou método O quadratico). o tempo de execução cresce quadraticamente em relação ao tamanho da parte ordenada
+	srand(time(NULL)); // constante (notação mais restrita 1)
 
-	int n = 1000000, passo = 10000;
-	vector<int> v(n), original(n);
+	int N = 1000000, passo = 1000; // constante (notação mais restrita 1)
+	vector<int> v(N), original(N); // constante (notação mais restrita 1)
 
-	preencher(v, 1, n);
-	original = v;
+	preencher(v, 1, N); // linear (notação mais restrita n)
 
-	ofstream fout("dados.txt");
-	if (!fout) {
-		cerr << "Erro ao abrir dados.txt" << endl;
-		return 1;
+	original = v; // constante (notação mais restrita 1)
+
+	ofstream fout("dados.txt"); // constante (notação mais restrita 1)
+	if (!fout) { // constante (notação mais restrita 1)
+		cerr << "Erro ao abrir dados.txt" << endl; // 0 ou constante (notação mais restrita 1)
+
+		return 1; // 0 ou constante (notação mais restrita 1)
 	}
 
-	for (int i = passo; i <= n; i += passo) {
-		v = original;
-		auto inicio = high_resolution_clock::now();
-		ordenacaoPorInsercaoParcial(v, i);
-		auto fim = high_resolution_clock::now();
-		auto duracao = duration_cast<milliseconds>(fim - inicio).count();
-		fout << i << " " << duracao << endl;
-		cout << "Ordenado: " << i << " elementos em " << duracao << " ms" << endl;
+	// para rodar em baixo, nao pode executar o escopo do if. caso rode, td o restante é 0. para análise, consideraremos que nao tenha executado o escopo da estrutura condicional
+	for (int tam = passo; tam <= N; tam += passo) { // linear (notação mais restrita n)
+		v = original; // constante * linear (notação mais restrita n)
+
+		auto inicio = high_resolution_clock::now(); // constante * linear (notação mais restrita n)
+		ordenacaoPorInsercaoParcial(v, tam); // quadratico (notação mais restrita n^2)
+		auto fim = high_resolution_clock::now(); // constante * linear (notação mais restrita n)
+
+		auto duracao = duration_cast<seconds>(fim - inicio).count(); // constante * linear (notação mais restrita n)
+		fout << tam << " " << duracao << endl; // constante * linear (notação mais restrita n)
 	}
 
-	fout.close();
-	return 0;
+	fout.close(); // constante (notação mais restrita 1)
+
+	return 0; // constante (notação mais restrita 1)
 }
 
-void exibir(vector<int> &v) {
-    for(auto a : v)
-        cout << a << " ";
+void preencher(vector<int> &v, int min, int max) { // linear (notação mais restrita n)
+	for (int i = 0; i < v.size(); i++) // linear (notação mais restrita n)
+		v[i] = (rand() % (max - min + 1)) + min; // constante * linear (notação mais restrita n)
 }
 
-void ordenacaoPorInsercao(vector<int> &v) {
-    for(int i = 1; i <= v.size() - 1; i++) {
-        int chave = v[i];
-        int j = i - 1;
-        while(j >= 0 && v[j] > chave) {
-            v[j + 1] = v[j];
-            j = j - 1;
-        }
-        v[j + 1] = chave;
-    }
-}
-
-// Ordena apenas os primeiros 'tam' elementos do vetor v usando inserção
-void ordenacaoPorInsercaoParcial(vector<int> &v, int tam) {
-	for (int j = 1; j < tam; j++) {
-		int chave = v[j];
-		int k = j - 1;
-		while (k >= 0 && v[k] > chave) {
-			v[k + 1] = v[k];
-			k = k - 1;
+void ordenacaoPorInsercaoParcial(vector<int> &v, int tam) { // quadratico (notação mais restrita n^2)
+	for (int i = 1; i <= tam - 1; i++) { // quadratico (notação mais restrita n^2)
+		int chave = v[i]; // constante (notação mais restrita 1)
+		int j = i - 1; // constante (notação mais restrita 1)
+		while (j >= 0 && v[j] > chave) { // linear * linear (notação mais restrita n^2)
+			v[j + 1] = v[j]; // constante * linear (notação mais restrita n)
+			j = j - 1; // constante * linear (notação mais restrita n)
 		}
-		v[k + 1] = chave;
+		v[j + 1] = chave; // constante * linear (notação mais restrita n)
 	}
-}
-
-
-void preencher(vector<int> &v, int min, int max) {
-	for (int i = 0; i < v.size(); i++)
-		v[i] = (rand() % (max - min + 1)) + min;
 }
