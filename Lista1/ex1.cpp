@@ -8,7 +8,7 @@ const int TAM = 10;
 using namespace std;
 
 void exibir(vector<int> &v);
-void ordenacao(vector<int> &v);
+void ordenacaoPorInsercao(vector<int> &v);
 void preencher(vector<int> &v, int min, int max);
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
 
     cout << endl;
 
-    ordenacao(v);
+    ordenacaoPorInsercao(v);
 
     exibir(v);
 
@@ -35,7 +35,7 @@ void exibir(vector<int> &v) {
         cout << a << " ";
 }
 
-void ordenacao(vector<int> &v) {
+void ordenacaoPorInsercao(vector<int> &v) {
     for(int i = 1; i <= v.size() - 1; i++) {
         int chave = v[i];
         int j = i - 1;
