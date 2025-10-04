@@ -11,7 +11,7 @@ using namespace chrono;
 void preencher(vector<int> &v, int min, int max);
 void ordenacaoPorInsercaoParcial(vector<int> &v, int tam);
 
-int main() { // quadratico (método omega n ou método O quadratico). o tempo de execução cresce quadraticamente em relação ao tamanho da parte ordenada
+int main() { // Pior caso: quadratico (método O quadratico). o tempo de execução cresce quadraticamente em relação ao tamanho da parte ordenada
 	srand(time(NULL)); // constante (notação mais restrita 1)
 
 	int N = 1000000, passo = 1000; // constante (notação mais restrita 1)
@@ -23,9 +23,9 @@ int main() { // quadratico (método omega n ou método O quadratico). o tempo de
 
 	ofstream fout("dados.txt"); // constante (notação mais restrita 1)
 	if (!fout) { // constante (notação mais restrita 1)
-		cerr << "Erro ao abrir dados.txt" << endl; // 0 ou constante (notação mais restrita 1)
+		cerr << "Erro ao abrir dados.txt" << endl; // 0 ou constante (notação O 1)
 
-		return 1; // 0 ou constante (notação mais restrita 1)
+		return 1; // 0 ou constante (notação O 1)
 	}
 
 	// para rodar em baixo, nao pode executar o escopo do if. caso rode, td o restante é 0. para análise, consideraremos que nao tenha executado o escopo da estrutura condicional
