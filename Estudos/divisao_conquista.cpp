@@ -67,7 +67,7 @@ void exibeReverso(int *vet, int ini, int fim) {
 }
 
 void exibeNormal(int *vet, int ini, int fim) {
-    if (ini > fim)
+    if (fim < ini)
         return;
     printf("%d ", vet[ini]);
     exibeNormal(vet, ini + 1, fim);
