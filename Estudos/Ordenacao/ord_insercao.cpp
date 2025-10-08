@@ -34,16 +34,14 @@ void exibir(vector<int> &v) {
 }
 
 void ord_insercao(vector<int> &v) {
-    for(int i = 0; i < v.size() - 1; i++) {
-        int id_menor = i;
-
-        for(int j = i+1; j < v.size(); j++)
-            if(v[j] < v[id_menor])
-                id_menor = j;
-
-        int aux = v[i];
-        v[i] = v[id_menor];
-        v[id_menor] = aux;
+    for(int i = 1; i <= v.size() - 1; i++) {
+        int chave = v[i];
+        int j = i - 1;
+        while(j >= 0 && v[j] > chave) {
+            v[j + 1] = v[j];
+            j = j - 1;
+        }
+        v[j + 1] = chave;
     }
 }
 
