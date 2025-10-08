@@ -37,7 +37,7 @@ void ord_flutuacao(vector<int> &v) {
     bool trocou = true;
     while(trocou) {
         trocou = false;
-        for(int i = 1; i < v.size() - 1; i++) {
+        for(int i = 1; i < v.size(); i++) {
             if(v[i] < v[i - 1]) {
                 int aux = v[i];
                 v[i] = v[i - 1];
