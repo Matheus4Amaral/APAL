@@ -50,5 +50,5 @@ void exibir(vector<int> &v) {
 
 void preencher(vector<int> &v, int min, int max) {
     for(int i = 0; i < v.size(); i++)
-        v[i] = min + rand()%(max - min + 1);      // min + rand()%(qtde) => qtde = max - min + 1
+        v[i] = min + rand()%(max - min + 1);
 }

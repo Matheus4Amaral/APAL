@@ -1,60 +1,61 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
-int busca_linear(int *v, int n, int k);
-int busca_linear_otim(int *v, int n, int k);
-void exibir(int *v, int n);
-void preencher(int *v, int n, int min, int max);
-void selectionSort(int *v, int n);
+int busca_linear(vector<int> &v, int k);
+int busca_linear_otim(vector<int> &v, int k);
+void exibir(vector<int> &v);
+void preencher(vector<int> &v, int min, int max);
+void selectionSort(vector<int> &v);
 
 const int TAM = 30; // #define TAM 30
 
 int main() {
     srand(time(NULL));
-    int v[TAM];
+    vector<int> v(TAM);
     
-    preencher(v, TAM, 1, 100);
-    exibir(v, TAM);
+    preencher(v, 1, 100);
+    exibir(v);
     cout << endl;
-    /*cout << busca_linear(v, TAM, v[5]) << endl;
-    cout << busca_linear(v, TAM, 101) << endl;*/
-    selectionSort(v, TAM);
-    exibir(v, TAM);
+    /*cout << busca_linear(v, v[5]) << endl;
+    cout << busca_linear(v, 101) << endl;*/
+    selectionSort(v);
+    exibir(v);
     cout << endl;
 
     return 0;
 }
 
-int busca_linear(int *v, int n, int k) {
-    for(int i = 0; i < n; i++)
+int busca_linear(vector<int> &v, int k) {
+    for(int i = 0; i < v.size(); i++)
         if(v[i] == k)
             return i;
     
     return -1;
 }
 
-int busca_linear_otim(int *v, int n, int k) {
-    for(int i = 0; i < n && v[i] <= k; i++)
+int busca_linear_otim(vector<int> &v, int k) {
+    for(int i = 0; i < v.size() && v[i] <= k; i++)
         if(v[i] == k)
             return i;
     
     return -1;
 }
 
-void exibir(int *v, int n) {
-    for(int i = 0; i < n; i++) {
+void exibir(vector<int> &v) {
+    for(int i = 0; i < v.size(); i++) {
         int a = v[i];
         cout << a << " ";
     }
 }
 
-void selectionSort(int *v, int n) {
-    for(int i = 0; i < n-1; i++) {
+void selectionSort(vector<int> &v) {
+    for(int i = 0; i < v.size()-1; i++) {
         int id_menor = i;
-        for(int j = i+1; j < n; j++)
+        for(int j = i+1; j < v.size(); j++)
             if(v[j] < v[id_menor])
                 id_menor = j;
         int aux = v[i];
@@ -63,7 +64,7 @@ void selectionSort(int *v, int n) {
     }
 }
 
-void preencher(int *v, int n, int min, int max) {
-    for(int i = 0; i < n; i++)
-        v[i] = min + rand()%(max - min + 1);      // min + rand()%(qtde) => qtde = max - min + 1
+void preencher(vector<int> &v, int min, int max) {
+    for(int i = 0; i < v.size(); i++)
+        v[i] = min + rand()%(max - min + 1);
 }

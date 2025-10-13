@@ -35,20 +35,19 @@ void exibir(vector<int> &v) {
 }
 
 int particionamento(vector<int> &v, int e, int d) {
-    int p = v[e];
-    int atual = e + 1, k = e + 1;
+    int p = e, atual, k;
+    atual = k = p + 1;
 
-    for(int i = e; i < d; i++) {
-        if(v[atual] <= v[p]) {
+    while (atual <= d) {
+        if(v[atual] < v[p]) {
             swap(v[k], v[atual]);
             k++;
         }
         atual++;
     }
+    swap(v[p], v[k-1]);
 
-    k--;
-
-    return k;
+    return k - 1;
 }
 
 void preencher(vector<int> &v, int min, int max) {
@@ -57,6 +56,9 @@ void preencher(vector<int> &v, int min, int max) {
 }
 
 void quickSort(vector<int> &v, int e, int d) {
+    if(e >= d)
+        return;
+
     int p = particionamento(v, e, d);
     quickSort(v, e, p-1);
     quickSort(v, p+1, d);
