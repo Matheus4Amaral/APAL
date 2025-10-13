@@ -6,8 +6,9 @@
 using namespace std;
 
 void exibir(vector<int> &v);
+int particionamento(vector<int> &v, int e, int d);
 void preencher(vector<int> &v, int min, int max);
-void ord_insercao(vector<int> &v);
+void quickSort(vector<int> &v, int e, int d);
 
 const int TAM = 30; // #define TAM 30
 
@@ -19,7 +20,7 @@ int main() {
     exibir(v);
     cout << endl;
 
-    ord_insercao(v);
+    quickSort(v, 0, v.size());
     exibir(v);
     cout << endl;
 
@@ -33,19 +34,30 @@ void exibir(vector<int> &v) {
     }
 }
 
-void ord_insercao(vector<int> &v) {
-    for(int i = 1; i <= v.size() - 1; i++) {
-        int chave = v[i];
-        int j = i - 1;
-        while(j >= 0 && v[j] > chave) {
-            v[j + 1] = v[j];
-            j = j - 1;
+int particionamento(vector<int> &v, int e, int d) {
+    int p = v[e];
+    int atual = e + 1, k = e + 1;
+
+    for(int i = e; i < d; i++) {
+        if(v[atual] <= v[p]) {
+            swap(v[k], v[atual]);
+            k++;
         }
-        v[j + 1] = chave;
+        atual++;
     }
+
+    k--;
+
+    return k;
 }
 
 void preencher(vector<int> &v, int min, int max) {
     for(int i = 0; i < v.size(); i++)
-        v[i] = min + rand()%(max - min + 1);      // min + rand()%(qtde) => qtde = max - min + 1
+        v[i] = min + rand()%(max - min + 1);
+}
+
+void quickSort(vector<int> &v, int e, int d) {
+    int p = particionamento(v, e, d);
+    quickSort(v, e, p-1);
+    quickSort(v, p+1, d);
 }

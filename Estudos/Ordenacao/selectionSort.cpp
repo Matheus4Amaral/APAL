@@ -8,7 +8,7 @@ int busca_linear(int *v, int n, int k);
 int busca_linear_otim(int *v, int n, int k);
 void exibir(int *v, int n);
 void preencher(int *v, int n, int min, int max);
-void ord_selecao(int *v, int n);
+void selectionSort(int *v, int n);
 
 const int TAM = 30; // #define TAM 30
 
@@ -21,7 +21,7 @@ int main() {
     cout << endl;
     /*cout << busca_linear(v, TAM, v[5]) << endl;
     cout << busca_linear(v, TAM, 101) << endl;*/
-    ord_selecao(v, TAM);
+    selectionSort(v, TAM);
     exibir(v, TAM);
     cout << endl;
 
@@ -51,7 +51,7 @@ void exibir(int *v, int n) {
     }
 }
 
-void ord_selecao(int *v, int n) {
+void selectionSort(int *v, int n) {
     for(int i = 0; i < n-1; i++) {
         int id_menor = i;
         for(int j = i+1; j < n; j++)

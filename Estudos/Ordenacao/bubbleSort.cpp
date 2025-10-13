@@ -5,9 +5,9 @@
 
 using namespace std;
 
+void bubbleSort(vector<int> &v);
 void exibir(vector<int> &v);
 void preencher(vector<int> &v, int min, int max);
-void ord_flutuacao(vector<int> &v);
 
 const int TAM = 30; // #define TAM 30
 
@@ -19,21 +19,14 @@ int main() {
     exibir(v);
     cout << endl;
 
-    ord_flutuacao(v);
+    bubbleSort(v);
     exibir(v);
     cout << endl;
 
     return 0;
 }
 
-void exibir(vector<int> &v) {
-    for(int i = 0; i < v.size(); i++) {
-        int a = v[i];
-        cout << a << " ";
-    }
-}
-
-void ord_flutuacao(vector<int> &v) {
+void bubbleSort(vector<int> &v) {
     bool trocou = true;
     while(trocou) {
         trocou = false;
@@ -45,6 +38,13 @@ void ord_flutuacao(vector<int> &v) {
                 trocou = true;
             }
         }
+    }
+}
+
+void exibir(vector<int> &v) {
+    for(int i = 0; i < v.size(); i++) {
+        int a = v[i];
+        cout << a << " ";
     }
 }
 
