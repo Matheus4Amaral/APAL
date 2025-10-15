@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
@@ -11,19 +13,24 @@ using namespace std;
 5) Exibir o conteúdo de um vetor de inteiros (int* ou vector) do início ao fim
 */
 
-float pot(int b, int e);
-int soma(int *vet, int ini, int fim);
-int menor(int *vet, int ini, int fim);
+const int TAM = 5;
+
 void exibeReverso(int *vet, int ini, int fim);
 void exibeNormal(int *vet, int ini, int fim);
+int menor(int *vet, int ini, int fim);
+float pot(int b, int e);
+void preenche(int *vet, int TAM, int min, int max);
+int soma(int *vet, int ini, int fim);
 
 int main() {
     /*for(int i = 0; i <= 10; i++) {
         printf("2^%d = %.0f\n", i, pot(2, i));
         printf("2^%d = %.0f\n", i, pow(2, i));
     }*/
+    srand(time(NULL));
+    int vet[TAM];
+    preenche(vet, TAM, 1, 100);
 
-    int vet[] = {1,2,3,4,5,6,7,8,9,10};
     printf("soma: %d\n", soma(vet, 0, sizeof(vet)/sizeof(int) - 1));
     printf("menor: %d\n", menor(vet, 0, sizeof(vet)/sizeof(int) - 1));
     printf("exibe fim ao inicio: ");
@@ -36,20 +43,20 @@ int main() {
     return 0;
 }
 
-int soma(int *vet, int ini, int fim) {
-    if(fim == ini)
-        return vet[fim];
+void exibeNormal(int *vet, int ini, int fim) {
+    if (fim < ini)
+        return;
 
-    return soma(vet, ini, floor((fim+ini)/2.)) + soma(vet, 1 + floor((fim+ini)/2.), fim);
+    cout << vet[ini] << " ";
+    exibeNormal(vet, ini + 1, fim);
 }
 
-float pot(int b, int e) {
-    if(e == 0)
-        return 1;
-    else if(e == 1)
-        return b;
-    
-    return pot(b, ceil(e/2.)) * pot(b, floor(e/2.));
+void exibeReverso(int *vet, int ini, int fim) {
+    if (fim < ini)
+        return;
+
+    cout << vet[fim] << " ";
+    exibeReverso(vet, ini, fim - 1);
 }
 
 int menor(int *vet, int ini, int fim) {
@@ -61,18 +68,23 @@ int menor(int *vet, int ini, int fim) {
     return (m1 < m2) ? m1 : m2;
 }
 
-void exibeReverso(int *vet, int ini, int fim) {
-    if (fim < ini)
-        return;
-
-    cout << vet[fim] << " ";
-    exibeReverso(vet, ini, fim - 1);
+float pot(int b, int e) {
+    if(e == 0)
+        return 1;
+    else if(e == 1)
+        return b;
+    
+    return pot(b, ceil(e/2.)) * pot(b, floor(e/2.));
 }
 
-void exibeNormal(int *vet, int ini, int fim) {
-    if (fim < ini)
-        return;
+void preenche(int *vet, int TAM, int min, int max) {
+    for(int i = 0; i < TAM; i++)
+        vet[i] = min + rand() % (max - min + 1);
+}
 
-    cout << vet[ini] << " ";
-    exibeNormal(vet, ini + 1, fim);
+int soma(int *vet, int ini, int fim) {
+    if(fim == ini)
+        return vet[fim];
+
+    return soma(vet, ini, floor((fim+ini)/2.)) + soma(vet, 1 + floor((fim+ini)/2.), fim);
 }
