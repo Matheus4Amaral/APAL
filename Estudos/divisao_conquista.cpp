@@ -24,18 +24,20 @@ int main() {
     }*/
 
     int vet[] = {1,2,3,4,5,6,7,8,9,10};
-    // printf("soma: %d\n", soma(vet, 0, sizeof(vet)/sizeof(int) - 1));
+    printf("soma: %d\n", soma(vet, 0, sizeof(vet)/sizeof(int) - 1));
     printf("menor: %d\n", menor(vet, 0, sizeof(vet)/sizeof(int) - 1));
     printf("exibe fim ao inicio: ");
     exibeReverso(vet, 0, sizeof(vet)/sizeof(int) - 1);
     printf("\nexibe inicio ao fim: ");
     exibeNormal(vet, 0, sizeof(vet)/sizeof(int) - 1);
 
+    cout << endl;
+
     return 0;
 }
 
 int soma(int *vet, int ini, int fim) {
-    if(fim - ini == 0)
+    if(fim == ini)
         return vet[fim];
 
     return soma(vet, ini, floor((fim+ini)/2.)) + soma(vet, 1 + floor((fim+ini)/2.), fim);
@@ -62,13 +64,15 @@ int menor(int *vet, int ini, int fim) {
 void exibeReverso(int *vet, int ini, int fim) {
     if (fim < ini)
         return;
-    printf("%d ", vet[fim]);
+
+    cout << vet[fim] << " ";
     exibeReverso(vet, ini, fim - 1);
 }
 
 void exibeNormal(int *vet, int ini, int fim) {
     if (fim < ini)
         return;
-    printf("%d ", vet[ini]);
+
+    cout << vet[ini] << " ";
     exibeNormal(vet, ini + 1, fim);
 }
