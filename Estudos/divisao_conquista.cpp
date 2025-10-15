@@ -23,11 +23,13 @@ void preenche(int *vet, int TAM, int min, int max);
 int soma(int *vet, int ini, int fim);
 
 int main() {
-    /*for(int i = 0; i <= 10; i++) {
-        printf("2^%d = %.0f\n", i, pot(2, i));
-        printf("2^%d = %.0f\n", i, pow(2, i));
-    }*/
     srand(time(NULL));
+
+    for(int i = 0; i <= 10; i++) {
+        printf("2^%d = %.0f\n", i, pot(2, i));
+        //printf("2^%d = %.0f\n", i, pow(2, i));
+    }
+    
     int vet[TAM];
     preenche(vet, TAM, 1, 100);
 
