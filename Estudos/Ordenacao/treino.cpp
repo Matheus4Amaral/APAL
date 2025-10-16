@@ -8,6 +8,8 @@ using namespace std;
 void bubbleSort(vector<int> &v);
 void exibir(vector<int> &v);
 void insertionSort(vector<int> &v);
+void merge(vector<int> &v, int e, int m, int d);
+void mergeSort(vector<int> &v, int e, int d);
 int particionamento(vector<int> &v, int e, int d);
 void preencher(vector<int> &v, int min, int max);
 void quickSort(vector<int> &v, int e, int d);
@@ -24,7 +26,7 @@ int main() {
     cout << endl;
 
     //quickSort(v, 0, v.size());
-    insertionSort(v);
+    mergeSort(v, 0, v.size()-1);
     exibir(v);
     cout << endl;
 
@@ -45,10 +47,8 @@ void bubbleSort(vector<int> &v) {
 }
 
 void exibir(vector<int> &v) {
-    for(int i = 0; i < v.size(); i++) {
-        int a = v[i];
-        cout << a << " ";
-    }
+    for(auto i : v)
+        cout << i << " ";
 }
 
 void insertionSort(vector<int> &v) {
@@ -60,6 +60,37 @@ void insertionSort(vector<int> &v) {
         }
         v[j + 1] = chave;
     }
+}
+
+void merge(vector<int> &v, int e, int m, int d) {
+    vector<int> aux(d - e + 1);
+    int ide = e, idm = m+1, id = 0;
+
+    while(ide <= m && idm <= d) 
+        if(v[ide] <= v[idm])
+            aux[id++] = v[ide++];
+        else
+            aux[id++] = v[idm++];
+    
+    while(ide <= m)
+        aux[id++] = v[ide++];
+    while(idm <= d)
+        aux[id++] = v[idm++];
+
+    id = 0;
+    for(int i = e; i <= d; i++)
+        v[i] = aux[id++];
+    
+}
+
+void mergeSort(vector<int> &v, int e, int d) {
+    if(e >= d)
+        return;
+    
+    int m = e + (d-e)/2;
+    mergeSort(v, e, m);
+    mergeSort(v, m+1, d);
+    merge(v, e, m, d);
 }
 
 int particionamento(vector<int> &v, int e, int d) {
