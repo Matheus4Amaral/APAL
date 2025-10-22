@@ -55,6 +55,9 @@ void contagem(vector<int> &v) {
         ord[val-1] = v[i];
         aux[idx]--;
     }
+
+    for(int i = 0; i < v.size(); i++)
+        v[i] = ord[i];
 }
 
 void exibir(vector<int> &v) {
